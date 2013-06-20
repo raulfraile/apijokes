@@ -1,0 +1,8 @@
+parameters:
+    raulfraile_apijokes_email_from: raulfraile@gmail.com
+    raulfraile_apijokes_email_to: raulfraile@gmail.com
+
+services:
+#    raul_fraile_api_jokes.example:
+#        class: %raul_fraile_api_jokes.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

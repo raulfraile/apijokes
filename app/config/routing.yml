@@ -1,0 +1,3 @@
+raul_fraile_api_jokes:
+    resource: "@RaulFraileApiJokesBundle/Resources/config/routing.yml"
+    prefix:   /

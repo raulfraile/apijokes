@@ -1,0 +1,11 @@
+{% extends "RaulFraileApiJokesBundle:Website:layout.html.twig" %}
+
+{% block content %}
+    <p>List of jokes:</p>
+
+    <ul>
+        {% for joke in jokes %}
+            <li>{{ joke.content }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

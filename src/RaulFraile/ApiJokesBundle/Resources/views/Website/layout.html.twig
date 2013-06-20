@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <header>
+            APIJokes
+        </header>
+
+        {% block content %}{% endblock %}
+
+        <footer>
+            &copy; {{ "now"|date("Y") }}
+        </footer>
+        {% include "RaulFraileApiJokesBundle:Website:_analytics.html.twig" %}
+    </body>
+</html>
