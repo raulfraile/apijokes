@@ -4,7 +4,7 @@ namespace RaulFraile\ApiJokesBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class WebsiteController extends Controller
+class WebsiteController extends BaseController
 {
     public function indexAction()
     {

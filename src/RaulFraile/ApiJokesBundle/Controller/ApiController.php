@@ -7,15 +7,15 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use RaulFraile\ApiJokesBundle\Entity\Joke;
 
-class ApiController extends Controller
+class ApiController extends BaseController
 {
     public function listAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getEntityManager();
 
         $jokes = $em->getRepository('RaulFraileApiJokesBundle:Joke')->findAll();
 
-        $data = array_map(function ($item) {
+        $data = array_map(function (Joke $item) {
             return array(
                 'id' => $item->getId(),
                 'content' => $item->getContent()
@@ -60,7 +60,8 @@ class ApiController extends Controller
                 array('joke' => $joke))
         );
 
-        $this->get('mailer')->send($message);
+        $mailer = $this->getMailer();
+        $mailer->send($message);
 
         return new JsonResponse(array(
             'id' => $joke->getId(),
@@ -88,6 +89,8 @@ class ApiController extends Controller
         $jokesRepository = $em->getRepository('RaulFraileApiJokesBundle:Joke');
 
         // get the object
+
+        /** @var $joke Joke */
         $joke = $jokesRepository->find($request->request->get('id'));
 
         if (null === $joke) {
@@ -111,10 +114,8 @@ class ApiController extends Controller
                 array('joke' => $joke))
         );
 
-        $this->get('mailer')->send($message);
-
-        /** @var $mailer \Swift_Mailer */
-        $mailer = $this->get('mailer');
+        $mailer = $this->getMailer();
+        $mailer->send($message);
 
         return new JsonResponse(array(
             'id' => $joke->getId(),
