@@ -65,7 +65,7 @@ class ApiController extends Controller
         return new JsonResponse(array(
             'id' => $joke->getId(),
             'content' => $joke->getContent()
-        ));
+        ), 201);
     }
 
     public function editAction()
@@ -113,9 +113,13 @@ class ApiController extends Controller
 
         $this->get('mailer')->send($message);
 
+        /** @var $mailer \Swift_Mailer */
+        $mailer = $this->get('mailer');
+
+
         return new JsonResponse(array(
             'id' => $joke->getId(),
             'content' => $joke->getContent()
-        ));
+        ), 204);
     }
 }
