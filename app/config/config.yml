@@ -24,6 +24,8 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    globals:
+        enable_analytics: %enable_analytics%
 
 # Assetic Configuration
 assetic:
@@ -63,4 +65,7 @@ swiftmailer:
     username:  %mailer_user%
     password:  %mailer_password%
     spool:     { type: memory }
+
+parameters:
+    enable_analytics: false
 
