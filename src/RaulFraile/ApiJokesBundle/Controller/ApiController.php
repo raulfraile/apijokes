@@ -116,7 +116,6 @@ class ApiController extends Controller
         /** @var $mailer \Swift_Mailer */
         $mailer = $this->get('mailer');
 
-
         return new JsonResponse(array(
             'id' => $joke->getId(),
             'content' => $joke->getContent()
