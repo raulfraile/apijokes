@@ -30,11 +30,6 @@ class ApiController extends BaseController
     {
         $request = $this->getRequest();
 
-        // check that the HTTP method is POST
-        if (!$request->isMethod('POST')) {
-            throw new \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException(array('POST'));
-        }
-
         $em = $this->getEntityManager();
 
         // validate input (don't allow jokes about java)
@@ -74,11 +69,6 @@ class ApiController extends BaseController
     public function editAction()
     {
         $request = $this->getRequest();
-
-        // check that the HTTP method is POST
-        if (!$request->isMethod('POST')) {
-            throw new \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException(array('POST'));
-        }
 
         $em = $this->getDoctrine()->getManager();
 

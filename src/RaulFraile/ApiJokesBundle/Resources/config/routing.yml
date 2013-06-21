@@ -1,14 +1,17 @@
 apijokes_api_list:
     pattern:  /api/list
     defaults: { _controller: RaulFraileApiJokesBundle:Api:list }
+    methods: [GET]
 
 apijokes_api_add:
     pattern:  /api/add
     defaults: { _controller: RaulFraileApiJokesBundle:Api:add }
+    methods: [POST]
 
 apijokes_api_edit:
     pattern:  /api/edit
     defaults: { _controller: RaulFraileApiJokesBundle:Api:edit }
+    methods: [POST]
 
 apijokes_website_index:
     pattern:  /
