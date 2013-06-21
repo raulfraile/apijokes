@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use RaulFraile\ApiJokesBundle\Entity\Joke;
+use RaulFraile\ApiJokesBundle\Validator\Constraints\ContainsJava;
 
 class ApiController extends BaseController
 {
@@ -34,12 +35,13 @@ class ApiController extends BaseController
             throw new \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException(array('POST'));
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getEntityManager();
 
         // validate input (don't allow jokes about java)
         $content = $request->request->get('content');
-        if (stripos($content, 'java') !== false) {
-            throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException('Java jokes are not allowed');
+        $errorList = $this->getValidator()->validateValue($content, new ContainsJava());
+        if ($errorList->count() > 0) {
+            throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException($errorList->get(0)->getMessage());
         }
 
         // create the object
@@ -82,8 +84,9 @@ class ApiController extends BaseController
 
         // validate input (don't allow jokes about java)
         $content = $request->request->get('content');
-        if (stripos($content, 'java') !== false) {
-            throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException('Java jokes are not allowed');
+        $errorList = $this->getValidator()->validateValue($content, new ContainsJava());
+        if ($errorList->count() > 0) {
+            throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException($errorList->get(0)->getMessage());
         }
 
         $jokesRepository = $em->getRepository('RaulFraileApiJokesBundle:Joke');

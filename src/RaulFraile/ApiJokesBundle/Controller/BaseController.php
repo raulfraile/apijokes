@@ -5,6 +5,7 @@ namespace RaulFraile\ApiJokesBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Validator\Validator;
 use Doctrine\ORM\EntityManager;
 use RaulFraile\ApiJokesBundle\Entity\Joke;
 
@@ -29,5 +30,15 @@ class BaseController extends Controller
     protected function getMailer()
     {
         return $this->get('mailer');
+    }
+
+    /**
+     * Get validator
+     *
+     * @return Validator
+     */
+    protected function getValidator()
+    {
+        return $this->get('validator');
     }
 }
