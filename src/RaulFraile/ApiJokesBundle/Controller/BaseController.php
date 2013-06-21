@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Validator;
 use Doctrine\ORM\EntityManager;
 use RaulFraile\ApiJokesBundle\Entity\Joke;
 
-class BaseController extends Controller
+abstract class BaseController extends Controller
 {
 
     /**

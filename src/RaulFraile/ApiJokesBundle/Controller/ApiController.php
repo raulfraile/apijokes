@@ -47,19 +47,6 @@ class ApiController extends BaseController
         $em->persist($joke);
         $em->flush();
 
-        // send email
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Joke created')
-            ->setFrom($this->container->getParameter('raulfraile_apijokes_email_from'))
-            ->setTo($this->container->getParameter('raulfraile_apijokes_email_to'))
-            ->setBody($this->renderView(
-                'RaulFraileApiJokesBundle:Email:joke_created.txt.twig',
-                array('joke' => $joke))
-        );
-
-        $mailer = $this->getMailer();
-        $mailer->send($message);
-
         return new JsonResponse(array(
             'id' => $joke->getId(),
             'content' => $joke->getContent()
@@ -96,19 +83,6 @@ class ApiController extends BaseController
         // persist
         $em->persist($joke);
         $em->flush();
-
-        // send email
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Joke updated')
-            ->setFrom($this->container->getParameter('raulfraile_apijokes_email_from'))
-            ->setTo($this->container->getParameter('raulfraile_apijokes_email_to'))
-            ->setBody($this->renderView(
-                'RaulFraileApiJokesBundle:Email:joke_updated.txt.twig',
-                array('joke' => $joke))
-        );
-
-        $mailer = $this->getMailer();
-        $mailer->send($message);
 
         return new JsonResponse(array(
             'id' => $joke->getId(),

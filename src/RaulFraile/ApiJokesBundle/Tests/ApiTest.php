@@ -52,7 +52,7 @@ class ApiTest extends WebTestCase
 
     public function testEdit()
     {
-        $newContent = 'test_edit';
+        $newContent = 'test_edit_' . date('Ymdhis');
 
         $client = static::createClient();
         $crawler = $client->request('POST', '/api/edit', array(

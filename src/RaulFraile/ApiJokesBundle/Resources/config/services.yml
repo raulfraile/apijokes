@@ -3,6 +3,9 @@ parameters:
     raulfraile_apijokes_email_to: raulfraile@gmail.com
 
 services:
-#    raul_fraile_api_jokes.example:
-#        class: %raul_fraile_api_jokes.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    raulfraile.listener.joke.emailer:
+        class:        "RaulFraile\\ApiJokesBundle\\EventListener\\JokeEmailer"
+        arguments:    ['@mailer', '@templating', '%raulfraile_apijokes_email_from%', '%raulfraile_apijokes_email_to%']
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+            - { name: doctrine.event_listener, event: postUpdate }
